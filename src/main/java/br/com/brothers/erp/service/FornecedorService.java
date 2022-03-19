@@ -1,7 +1,9 @@
 package br.com.brothers.erp.service;
 
-import br.com.brothers.erp.model.Cargo;
-import br.com.brothers.erp.repository.CargoRepository;
+import br.com.brothers.erp.model.Endereco;
+import br.com.brothers.erp.model.Fornecedor;
+import br.com.brothers.erp.repository.EnderecoRepository;
+import br.com.brothers.erp.repository.FornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,26 +13,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CargoService {
+public class FornecedorService {
 
     @Autowired
-    private CargoRepository cargoRepository;
+    private FornecedorRepository fornecedorRepository;
 
     @Transactional(readOnly = true)
-    public List<Cargo> getAll(){
+    public List<Fornecedor> getAll(){
         try{
-            return cargoRepository.findAll();
+            return fornecedorRepository.findAll();
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
 
     @Transactional(readOnly = true)
-    public Cargo findById(Long id){
+    public Fornecedor findById(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if(cargo.isPresent()){
-                return cargo.get();
+            Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
+            if(fornecedor.isPresent()){
+                return fornecedor.get();
             }else{
                 return null;
             }
@@ -42,9 +44,9 @@ public class CargoService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if (cargo.isPresent()){
-                cargoRepository.delete(cargo.get());
+            Optional<Fornecedor> fornecedor = fornecedorRepository.findById(id);
+            if (fornecedor.isPresent()){
+                fornecedorRepository.delete(fornecedor.get());
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);
@@ -52,20 +54,20 @@ public class CargoService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void save(Cargo cargo){
+    public void save(Fornecedor fornecedor){
         try{
-            cargoRepository.save(cargo);
+            fornecedorRepository.save(fornecedor);
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void update(Long id, Cargo cargo){
+    public void update(Long id, Fornecedor fornecedor){
         try{
-            Optional<Cargo> cargoOp = cargoRepository.findById(id);
-            if (cargoOp.isPresent()){
-                cargo.setId(id);
-                cargoRepository.save(cargo);
+            Optional<Fornecedor> fornecedorOp = fornecedorRepository.findById(id);
+            if (fornecedorOp.isPresent()){
+                fornecedor.setId(id);
+                fornecedorRepository.save(fornecedor);
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);

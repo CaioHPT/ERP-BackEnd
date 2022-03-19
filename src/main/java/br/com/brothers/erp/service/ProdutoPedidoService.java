@@ -1,7 +1,7 @@
 package br.com.brothers.erp.service;
 
-import br.com.brothers.erp.model.Cargo;
-import br.com.brothers.erp.repository.CargoRepository;
+import br.com.brothers.erp.model.Produto_Pedido;
+import br.com.brothers.erp.repository.ProdutoPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,26 +11,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CargoService {
+public class ProdutoPedidoService {
 
     @Autowired
-    private CargoRepository cargoRepository;
+    private ProdutoPedidoRepository produtoPedidoRepository;
 
     @Transactional(readOnly = true)
-    public List<Cargo> getAll(){
+    public List<Produto_Pedido> getAll(){
         try{
-            return cargoRepository.findAll();
+            return produtoPedidoRepository.findAll();
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
 
     @Transactional(readOnly = true)
-    public Cargo findById(Long id){
+    public Produto_Pedido findById(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if(cargo.isPresent()){
-                return cargo.get();
+            Optional<Produto_Pedido> produtoPedido = produtoPedidoRepository.findById(id);
+            if(produtoPedido.isPresent()){
+                return produtoPedido.get();
             }else{
                 return null;
             }
@@ -42,9 +42,9 @@ public class CargoService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if (cargo.isPresent()){
-                cargoRepository.delete(cargo.get());
+            Optional<Produto_Pedido> produtoPedido = produtoPedidoRepository.findById(id);
+            if (produtoPedido.isPresent()){
+                produtoPedidoRepository.delete(produtoPedido.get());
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);
@@ -52,20 +52,20 @@ public class CargoService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void save(Cargo cargo){
+    public void save(Produto_Pedido produtoPedido){
         try{
-            cargoRepository.save(cargo);
+            produtoPedidoRepository.save(produtoPedido);
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void update(Long id, Cargo cargo){
+    public void update(Long id, Produto_Pedido produtoPedido){
         try{
-            Optional<Cargo> cargoOp = cargoRepository.findById(id);
-            if (cargoOp.isPresent()){
-                cargo.setId(id);
-                cargoRepository.save(cargo);
+            Optional<Produto_Pedido> produtoPedidoOp = produtoPedidoRepository.findById(id);
+            if (produtoPedidoOp.isPresent()){
+                produtoPedido.setId(id);
+                produtoPedidoRepository.save(produtoPedido);
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);

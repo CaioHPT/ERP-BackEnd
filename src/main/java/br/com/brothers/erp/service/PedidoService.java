@@ -1,7 +1,7 @@
 package br.com.brothers.erp.service;
 
-import br.com.brothers.erp.model.Cargo;
-import br.com.brothers.erp.repository.CargoRepository;
+import br.com.brothers.erp.model.Pedido;
+import br.com.brothers.erp.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,26 +11,26 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CargoService {
+public class PedidoService {
 
     @Autowired
-    private CargoRepository cargoRepository;
+    private PedidoRepository pedidoRepository;
 
     @Transactional(readOnly = true)
-    public List<Cargo> getAll(){
+    public List<Pedido> getAll(){
         try{
-            return cargoRepository.findAll();
+            return pedidoRepository.findAll();
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
 
     @Transactional(readOnly = true)
-    public Cargo findById(Long id){
+    public Pedido findById(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if(cargo.isPresent()){
-                return cargo.get();
+            Optional<Pedido> pedido = pedidoRepository.findById(id);
+            if(pedido.isPresent()){
+                return pedido.get();
             }else{
                 return null;
             }
@@ -42,9 +42,9 @@ public class CargoService {
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(Long id){
         try{
-            Optional<Cargo> cargo = cargoRepository.findById(id);
-            if (cargo.isPresent()){
-                cargoRepository.delete(cargo.get());
+            Optional<Pedido> pedido = pedidoRepository.findById(id);
+            if (pedido.isPresent()){
+                pedidoRepository.delete(pedido.get());
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);
@@ -52,20 +52,20 @@ public class CargoService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void save(Cargo cargo){
+    public void save(Pedido pedido){
         try{
-            cargoRepository.save(cargo);
+            pedidoRepository.save(pedido);
         }catch (Exception ex){
             throw new RuntimeException(ex);
         }
     }
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void update(Long id, Cargo cargo){
+    public void update(Long id, Pedido pedido){
         try{
-            Optional<Cargo> cargoOp = cargoRepository.findById(id);
-            if (cargoOp.isPresent()){
-                cargo.setId(id);
-                cargoRepository.save(cargo);
+            Optional<Pedido> pedidoOp = pedidoRepository.findById(id);
+            if (pedidoOp.isPresent()){
+                pedido.setId(id);
+                pedidoRepository.save(pedido);
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);
