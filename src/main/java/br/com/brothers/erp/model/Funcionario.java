@@ -16,10 +16,10 @@ public class Funcionario {
     private String nome;
 
     @Column(nullable = false, columnDefinition = "CHAR(11)")
-    private char cpf;
+    private String cpf;
 
     @Column(nullable = false, columnDefinition = "CHAR(9)")
-    private char rg;
+    private String rg;
 
     @Column(nullable = false)
     private Date nascimento;
@@ -61,19 +61,19 @@ public class Funcionario {
         this.nome = nome;
     }
 
-    public char getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(char cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public char getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(char rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 

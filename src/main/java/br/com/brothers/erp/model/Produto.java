@@ -15,7 +15,7 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false, columnDefinition = "CHAR(3)")
-    private char unidade_medida;
+    private String unidade_medida;
 
     @Column(nullable = false, precision = 10, scale = 4)
     private Double preco;
@@ -56,11 +56,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public char getUnidade_medida() {
+    public String getUnidade_medida() {
         return unidade_medida;
     }
 
-    public void setUnidade_medida(char unidade_medida) {
+    public void setUnidade_medida(String unidade_medida) {
         this.unidade_medida = unidade_medida;
     }
 

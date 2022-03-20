@@ -13,7 +13,7 @@ public class Cargo {
     private Long id;
 
     @Column(nullable = false, columnDefinition = "CHAR(6)")
-    private char cbo;
+    private String cbo;
 
     @Column(nullable = false, length = 20)
     private String descricao;
@@ -33,11 +33,11 @@ public class Cargo {
         this.id = id;
     }
 
-    public char getCbo() {
+    public String getCbo() {
         return cbo;
     }
 
-    public void setCbo(char cbo) {
+    public void setCbo(String cbo) {
         this.cbo = cbo;
     }
 

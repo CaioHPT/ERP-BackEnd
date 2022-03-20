@@ -16,7 +16,7 @@ public class Fornecedor {
     private String razao_social;
 
     @Column(nullable = false, columnDefinition = "CHAR(14)")
-    private char cnpj;
+    private String cnpj;
 
     @Column(nullable = false, length = 70)
     private String email;
@@ -54,11 +54,11 @@ public class Fornecedor {
         this.razao_social = razao_social;
     }
 
-    public char getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(char cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
