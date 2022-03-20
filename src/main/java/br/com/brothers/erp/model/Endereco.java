@@ -15,7 +15,7 @@ public class Endereco {
     private String logradouro;
 
     @Column(nullable = false, length = 8)
-    private String número;
+    private String numero;
 
     @Column(nullable = false, length = 30)
     private String bairro;
@@ -24,10 +24,10 @@ public class Endereco {
     private String cidade;
 
     @Column(nullable = false, columnDefinition = "CHAR(2)")
-    private char uf;
+    private String uf;
 
     @Column(nullable = false, columnDefinition = "CHAR(8)")
-    private char cep;
+    private String cep;
 
     @Column(length = 40)
     private String complemento;
@@ -64,12 +64,12 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getNúmero() {
-        return número;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNúmero(String número) {
-        this.número = número;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getBairro() {
@@ -88,19 +88,19 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public char getUf() {
+    public String getUf() {
         return uf;
     }
 
-    public void setUf(char uf) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
 
-    public char getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(char cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
