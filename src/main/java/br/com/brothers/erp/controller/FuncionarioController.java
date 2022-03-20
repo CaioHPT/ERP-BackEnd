@@ -50,8 +50,14 @@ public class FuncionarioController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Funcionario funcionario){
         try{
-            funcionarioService.update(id, funcionario);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Funcionario funcionarioGet = funcionarioService.findById(id);
+            if(funcionarioGet != null){
+                funcionarioService.update(id, funcionario);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,11 +66,15 @@ public class FuncionarioController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            funcionarioService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Funcionario funcionario = funcionarioService.findById(id);
+            if(funcionario != null){
+                funcionarioService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }
-
 }

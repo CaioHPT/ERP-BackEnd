@@ -50,8 +50,14 @@ public class CargoController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Cargo cargo){
         try{
-            cargoService.update(id, cargo);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Cargo cargoGet = cargoService.findById(id);
+            if(cargoGet != null){
+                cargoService.update(id, cargo);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,11 +66,15 @@ public class CargoController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            cargoService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Cargo cargo = cargoService.findById(id);
+            if(cargo != null){
+                cargoService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }
-
 }

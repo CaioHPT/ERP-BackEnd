@@ -50,8 +50,14 @@ public class ClienteController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Cliente cliente){
         try{
-            clienteService.update(id, cliente);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Cliente clienteGet = clienteService.findById(id);
+            if(clienteGet != null){
+                clienteService.update(id, cliente);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,11 +66,15 @@ public class ClienteController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            clienteService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Cliente cliente = clienteService.findById(id);
+            if(cliente != null){
+                clienteService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }
-
 }

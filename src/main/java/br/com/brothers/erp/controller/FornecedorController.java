@@ -50,8 +50,14 @@ public class FornecedorController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Fornecedor fornecedor){
         try{
-            fornecedorService.update(id, fornecedor);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Fornecedor fornecedorGet = fornecedorService.findById(id);
+            if(fornecedorGet != null){
+                fornecedorService.update(id, fornecedor);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,11 +66,15 @@ public class FornecedorController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            fornecedorService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Fornecedor fornecedor = fornecedorService.findById(id);
+            if(fornecedor != null){
+                fornecedorService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }
-
 }

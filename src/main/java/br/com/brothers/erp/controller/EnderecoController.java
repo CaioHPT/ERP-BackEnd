@@ -50,8 +50,14 @@ public class EnderecoController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Endereco endereco){
         try{
-            enderecoService.update(id, endereco);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Endereco enderecoGet = enderecoService.findById(id);
+            if(enderecoGet != null){
+                enderecoService.update(id, endereco);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,8 +66,13 @@ public class EnderecoController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            enderecoService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Endereco endereco = enderecoService.findById(id);
+            if(endereco != null){
+                enderecoService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }

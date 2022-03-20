@@ -50,8 +50,14 @@ public class PedidoController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity update(@PathVariable Long id,@RequestBody Pedido pedido){
         try{
-            pedidoService.update(id, pedido);
-            return ResponseEntity.ok().body("Atualizado com sucesso");
+            Pedido pedidoGet = pedidoService.findById(id);
+            if(pedidoGet != null){
+                pedidoService.update(id, pedido);
+                return ResponseEntity.ok().body("Atualizado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
+
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
@@ -60,11 +66,15 @@ public class PedidoController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try{
-            pedidoService.delete(id);
-            return ResponseEntity.ok().body("deletado com sucesso");
+            Pedido pedido = pedidoService.findById(id);
+            if(pedido != null){
+                pedidoService.delete(id);
+                return ResponseEntity.ok().body("deletado com sucesso");
+            }else{
+                return ResponseEntity.noContent().build();
+            }
         }catch (Exception ex){
             return ResponseEntity.badRequest().build();
         }
     }
-
 }
