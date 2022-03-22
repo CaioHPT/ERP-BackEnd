@@ -1,5 +1,7 @@
 package br.com.brothers.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -35,12 +37,15 @@ public class Endereco {
     @Column(length = 100)
     private String referencia;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "endereco")
     private Funcionario funcionario;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "endereco")
     private Cliente cliente;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "endereco")
     private Fornecedor fornecedor;
 

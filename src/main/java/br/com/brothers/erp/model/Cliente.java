@@ -24,7 +24,8 @@ public class Cliente {
     @Column(nullable = false, length = 8)
     private String tipo;
 
-    private Date nascimento;
+    @Column(columnDefinition = "date")
+    private String nascimento;
 
     @Column(nullable = false, length = 70)
     private String email;
@@ -35,9 +36,10 @@ public class Cliente {
     @Column(length = 30)
     private String contato;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
+
 
     @OneToOne(mappedBy = "cliente")
     private Pedido pedido;
@@ -86,11 +88,11 @@ public class Cliente {
         this.tipo = tipo;
     }
 
-    public Date getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 

@@ -14,8 +14,8 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Date data;
+    @Column(nullable = false, columnDefinition = "date")
+    private String data;
 
     @Column(nullable = false, precision = 10, scale = 4)
     private Double valor_total;
@@ -46,11 +46,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

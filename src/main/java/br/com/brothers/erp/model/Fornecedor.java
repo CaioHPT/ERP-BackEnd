@@ -27,7 +27,7 @@ public class Fornecedor {
     @Column(nullable = false, length = 30)
     private String contato;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "endereco_id")
     private Endereco endereco;
 

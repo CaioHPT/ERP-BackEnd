@@ -1,5 +1,7 @@
 package br.com.brothers.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -21,8 +23,8 @@ public class Funcionario {
     @Column(nullable = false, columnDefinition = "CHAR(9)")
     private String rg;
 
-    @Column(nullable = false)
-    private Date nascimento;
+    @Column(nullable = false, columnDefinition = "date")
+    private String nascimento;
 
     @Column(nullable = false, length = 70)
     private String email;
@@ -34,10 +36,11 @@ public class Funcionario {
     @JoinColumn(nullable = false, name = "cargo_id")
     private Cargo cargo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "endereco_id")
     private Endereco endereco;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "funcionario")
     private Pedido pedido;
 
@@ -77,11 +80,11 @@ public class Funcionario {
         this.rg = rg;
     }
 
-    public Date getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 

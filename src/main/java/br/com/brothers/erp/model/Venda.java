@@ -12,8 +12,8 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Date data;
+    @Column(nullable = false, columnDefinition = "date")
+    private String data;
 
     @Column(nullable = false, length = 20)
     private String forma_pagamento;
@@ -34,11 +34,11 @@ public class Venda {
         this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

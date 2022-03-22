@@ -1,5 +1,7 @@
 package br.com.brothers.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,7 @@ public class Cargo {
     @Column(nullable = false, length = 20)
     private String descricao;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cargo")
     private List<Funcionario> funcionarios;
 
