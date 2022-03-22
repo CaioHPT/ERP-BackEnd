@@ -1,6 +1,8 @@
 package br.com.brothers.erp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +30,11 @@ public class Pedido {
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<Produto_Pedido> produtoPedido;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "pedido")
     private Venda venda;
 

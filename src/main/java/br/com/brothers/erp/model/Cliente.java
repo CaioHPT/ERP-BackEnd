@@ -1,5 +1,7 @@
 package br.com.brothers.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -40,7 +42,7 @@ public class Cliente {
     @JoinColumn(name = "endereco_id", nullable = false)
     private Endereco endereco;
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "cliente")
     private Pedido pedido;
 

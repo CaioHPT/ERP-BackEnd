@@ -1,5 +1,7 @@
 package br.com.brothers.erp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -31,6 +33,7 @@ public class Fornecedor {
     @JoinColumn(nullable = false, name = "endereco_id")
     private Endereco endereco;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fornecedor")
     private List<Produto> produtos;
 
