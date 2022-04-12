@@ -29,11 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.inMemoryAuthentication()
-                .withUser("caio")
-                .password(passwordEncoder.encode("123"))
-                .roles("ADMIN", "USER");
-
         auth.userDetailsService(service).passwordEncoder(passwordEncoder);
     }
 
